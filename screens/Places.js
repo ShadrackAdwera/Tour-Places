@@ -1,13 +1,30 @@
 import React from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { useSelector } from 'react-redux';
+import { View, Text, FlatList, StyleSheet, Platform } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButtons';
+import PlaceItem from '../components/PlaceItem';
 
 const Places = (props) => {
+  const places = useSelector((state) => state.places.places);
   return (
-    <View style={styles.screen}>
-      <Text>Places Screen</Text>
-    </View>
+    <FlatList
+      data={places}
+      keyExtractor={(item) => item.id}
+      renderItem={(itemData) => (
+        <PlaceItem
+          image={null}
+          title={itemData.item.title}
+          address={null}
+          onSelect={() => {
+            props.navigation.navigate('placeDetail', {
+              placeTitle: itemData.item.title,
+              placeId: itemData.item.id,
+            });
+          }}
+        />
+      )}
+    />
   );
 };
 
@@ -27,7 +44,9 @@ Places.navigationOptions = (navData) => {
         <Item
           title="Add place"
           iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
-          onPress={()=>{navData.navigation.navigate('newPlace')}}
+          onPress={() => {
+            navData.navigation.navigate('newPlace');
+          }}
         />
       </HeaderButtons>
     ),

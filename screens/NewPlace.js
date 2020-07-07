@@ -11,7 +11,7 @@ import {
 import * as actions from '../store/actions/places'
 import { COLOR_GREEN } from '../constants/Colors';
 
-const NewPlace = () => {
+const NewPlace = (props) => {
   const dispatch = useDispatch()
   const [title, setTitle] = useState('');
   const titleChangeHandler = (text) => {
@@ -20,6 +20,7 @@ const NewPlace = () => {
 
   const savePlaceHandler = () => {
     dispatch(actions.addPlace(title))
+    props.navigation.goBack()
   }
 
   return (

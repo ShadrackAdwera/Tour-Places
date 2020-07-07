@@ -15,8 +15,10 @@ const styles = StyleSheet.create({
     }
 })
 
-PlaceDetail.navigationOptions = {
-    headerTitle: 'Place Details'
+PlaceDetail.navigationOptions = navData =>{
+    return {
+        headerTitle: navData.navigation.getParam('placeTitle')
+    }
 }
 
 export default PlaceDetail
