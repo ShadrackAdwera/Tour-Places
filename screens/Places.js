@@ -15,4 +15,8 @@ const styles = StyleSheet.create({
     }
 })
 
+Places.navigationOptions = {
+    headerTitle: 'All Places'
+}
+
 export default Places
