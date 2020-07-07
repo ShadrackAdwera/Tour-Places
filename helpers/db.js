@@ -20,3 +20,22 @@ export const init = () => {
     })
     return promise
 };
+
+export const insertPlace = (title, image, address, lat, lng) => {
+    const promise = new Promise((resolve, reject)=>{
+        db.transaction((tx) => {
+            tx.executeSql(
+              `INSERT INTO deeznuts (title,image,address,lat,lng) VALUES (?,?,?,?,?)`,
+              [title,image,address,lat,lng],
+              (_, result)=> {
+                  resolve(result)
+              },
+              (_, err)=> {
+                  reject(err)
+              }
+            );
+          });
+
+    })
+    return promise
+}

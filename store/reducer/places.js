@@ -9,7 +9,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADDPLACE:
       const newPlace = new Place(
-        Math.random().toString(),
+        action.placeData.id.toString(),
         action.placeData.title,
         action.placeData.image
       );
