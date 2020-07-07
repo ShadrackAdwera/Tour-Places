@@ -1,5 +1,5 @@
 import Place from '../../models/Place';
-import { ADDPLACE } from '../actions/places';
+import { ADDPLACE, FETCHPLACES } from '../actions/places';
 
 const initialState = {
   places: [],
@@ -17,6 +17,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         places: state.places.concat(newPlace),
       };
+    case FETCHPLACES:
+        return {
+            ...state,
+            places: action.places.map(pl=>new Place(pl.id.toString(), pl.title, pl.image))
+        }
     default:
       return state;
   }

@@ -1,6 +1,7 @@
 import * as FileSystem from 'expo-file-system';
-import { insertPlace } from '../../helpers/db';
+import { insertPlace, fetchPlaces } from '../../helpers/db';
 export const ADDPLACE = 'ADDPLACE';
+export const FETCHPLACES = 'FETCHPLACES'
 
 export const addPlace = (title, image) => {
   return async (dispatch) => {
@@ -19,7 +20,6 @@ export const addPlace = (title, image) => {
         -1.2652386,
         36.8021517
       );
-      console.log(dbResult);
       dispatch({
         type: ADDPLACE,
         placeData: {
@@ -33,3 +33,16 @@ export const addPlace = (title, image) => {
     }
   };
 };
+
+export const loadPlaces = () => {
+    return async dispatch => {
+
+        try {
+            const fetchedPlaces = await fetchPlaces()
+            console.log(fetchedPlaces)
+            dispatch({type: FETCHPLACES, places: fetchedPlaces.rows._array})   
+        } catch (error) {
+            throw error
+        }
+    }
+}
