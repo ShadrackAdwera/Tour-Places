@@ -1,18 +1,61 @@
-import React from 'react'
-import { View, Text ,StyleSheet } from 'react-native'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
+import * as actions from '../store/actions/places'
+import { COLOR_GREEN } from '../constants/Colors';
 
-const NewPlace = props => {
-    return <View style={styles.screen}>
-        <Text>NewPlace Screen</Text>
-    </View>
-}
+const NewPlace = () => {
+  const dispatch = useDispatch()
+  const [title, setTitle] = useState('');
+  const titleChangeHandler = (text) => {
+    setTitle(text);
+  };
+
+  const savePlaceHandler = () => {
+    dispatch(actions.addPlace(title))
+  }
+
+  return (
+    <ScrollView>
+      <View style={styles.form}>
+        <Text style={styles.label}>Title</Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={titleChangeHandler}
+          value={title}
+        />
+        <Button title="Save Place" color={COLOR_GREEN} onPress={savePlaceHandler} />
+      </View>
+    </ScrollView>
+  );
+};
+
+NewPlace.navigationOptions = {
+  headerTitle: 'Add a Place',
+};
 
 const styles = StyleSheet.create({
-    screen: {
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center'
-    }
-})
+  form: {
+    margin: 30,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 15,
+  },
+  textInput: {
+    borderBottomColor: '#ccc',
+    borderBottomWidth: 1,
+    marginBottom: 15,
+    paddingVertical: 4,
+    paddingHorizontal: 2,
+  },
+});
 
-export default NewPlace
+export default NewPlace;
