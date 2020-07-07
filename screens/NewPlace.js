@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import * as actions from '../store/actions/places'
 import ImagePicker from '../components/ImageSelector'
+import LocationPicker from '../components/LocationPicker'
 import { COLOR_GREEN } from '../constants/Colors';
 
 const NewPlace = (props) => {
@@ -39,6 +40,7 @@ const NewPlace = (props) => {
           value={title}
         />
         <ImagePicker onImageTaken={imageTakenHandler}/>
+        <LocationPicker />
         <Button title="Save Place" color={COLOR_GREEN} onPress={savePlaceHandler} />
       </View>
     </ScrollView>
