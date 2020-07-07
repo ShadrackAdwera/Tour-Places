@@ -15,13 +15,18 @@ import { COLOR_GREEN } from '../constants/Colors';
 const NewPlace = (props) => {
   const dispatch = useDispatch()
   const [title, setTitle] = useState('');
+  const [selectedImage, setSelectedImage] = useState()
   const titleChangeHandler = (text) => {
     setTitle(text);
   };
 
   const savePlaceHandler = () => {
-    dispatch(actions.addPlace(title))
+    dispatch(actions.addPlace(title, selectedImage))
     props.navigation.goBack()
+  }
+
+  const imageTakenHandler = (imagePath) => {
+      setSelectedImage(imagePath)
   }
 
   return (
@@ -33,7 +38,7 @@ const NewPlace = (props) => {
           onChangeText={titleChangeHandler}
           value={title}
         />
-        <ImagePicker />
+        <ImagePicker onImageTaken={imageTakenHandler}/>
         <Button title="Save Place" color={COLOR_GREEN} onPress={savePlaceHandler} />
       </View>
     </ScrollView>

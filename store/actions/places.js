@@ -1,10 +1,11 @@
 export const ADDPLACE = 'ADDPLACE'
 
-export const addPlace = (title) => {
+export const addPlace = (title, image) => {
     return {
         type: ADDPLACE,
         placeData: {
-            title:title
+            title:title,
+            image: image
         }
     }
 }

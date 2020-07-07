@@ -13,7 +13,7 @@ const Places = (props) => {
       keyExtractor={(item) => item.id}
       renderItem={(itemData) => (
         <PlaceItem
-          image={null}
+          image={itemData.item.image}
           title={itemData.item.title}
           address={null}
           onSelect={() => {

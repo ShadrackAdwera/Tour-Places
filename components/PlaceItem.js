@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
   title: {
     color: 'black',
     fontSize: 18,
-    marginBottom: 5
+    marginBottom: 5,
+    fontWeight:'bold'
   },
   address: {
     color: '#666',
