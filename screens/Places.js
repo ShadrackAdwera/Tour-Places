@@ -22,7 +22,7 @@ const Places = (props) => {
         <PlaceItem
           image={itemData.item.image}
           title={itemData.item.title}
-          address={null}
+          address={itemData.item.address}
           onSelect={() => {
             props.navigation.navigate('placeDetail', {
               placeTitle: itemData.item.title,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux'
 import {
   View,
@@ -17,18 +17,25 @@ const NewPlace = (props) => {
   const dispatch = useDispatch()
   const [title, setTitle] = useState('');
   const [selectedImage, setSelectedImage] = useState()
+  const [selectedLocation, setSelectedLocation] = useState()
   const titleChangeHandler = (text) => {
     setTitle(text);
   };
 
+  const locationPickedHandler = useCallback((location) => {
+    setSelectedLocation(location)
+  },[])
+
   const savePlaceHandler = () => {
-    dispatch(actions.addPlace(title, selectedImage))
+    dispatch(actions.addPlace(title, selectedImage, selectedLocation))
     props.navigation.goBack()
   }
 
   const imageTakenHandler = (imagePath) => {
       setSelectedImage(imagePath)
   }
+
+  
 
   return (
     <ScrollView>
@@ -40,7 +47,7 @@ const NewPlace = (props) => {
           value={title}
         />
         <ImagePicker onImageTaken={imageTakenHandler}/>
-        <LocationPicker />
+        <LocationPicker navigation={props.navigation} onLocationPicked = {locationPickedHandler}/>
         <Button title="Save Place" color={COLOR_GREEN} onPress={savePlaceHandler} />
       </View>
     </ScrollView>
