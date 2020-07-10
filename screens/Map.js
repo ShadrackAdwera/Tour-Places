@@ -11,8 +11,8 @@ const Map = (props) => {
   const [selectedLocation, setSelectedLocation] = useState(initialLocation);
 
   const mapRegion = {
-    latitude: initialLocation? initialLocation.lat : 37.78,
-    longitude: initialLocation? initialLocation.lng : -122.43,
+    latitude: initialLocation? initialLocation.lat : -1.3030363,
+    longitude: initialLocation? initialLocation.lng : 36.7771851,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
